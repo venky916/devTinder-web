@@ -10,37 +10,37 @@ import { useEffect } from 'react';
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((store:any) =>store?.user)
+  const user = useSelector((store: any) => store?.user);
 
   const fetchUser = async () => {
-    if (user)  return ;
+    if (user) return;
     try {
-      const response:any = await axios.get(BASE_URL + 'profile/view', {
+      const response: any = await axios.get(BASE_URL + 'profile/view', {
         withCredentials: true,
       });
       dispatch(addUser(response?.data));
-
     } catch (error: any) {
       if (error?.status === 401) {
         navigate('/login');
-        console.log("hello")
+        console.log('hello');
       }
       console.error(error);
       // navigate('/Not-found')
     }
-    
   };
 
   useEffect(() => {
-      fetchUser();
+    fetchUser();
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      <Outlet />
+      <div className="flex-1">
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
