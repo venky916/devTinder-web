@@ -12,4 +12,12 @@ const appStore = configureStore({
   },
 });
 
+// ✅ Export RootState Type
+export type RootState = ReturnType<typeof appStore.getState>;
+
 export default appStore;
+
+
+
+
+

@@ -1,13 +1,15 @@
 import axios from 'axios';
-import React from 'react';
 import { BASE_URL } from '../utils/constants';
-import { useDispatch } from 'react-redux';
-import { addRequests } from '../utils/requestSlice';
-import { useQuery } from '@tanstack/react-query';
-import { user } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRequests, removeRequest } from '../utils/requestSlice';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAppSelector } from '../hooks/storeHook';
+import { connection } from '../types';
 
 const Requests = () => {
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  const requestStore = useAppSelector((store) => store.requests);
 
   const fetchRequests = async () => {
     try {
@@ -21,6 +23,44 @@ const Requests = () => {
       console.log(error);
     }
   };
+
+  const reviewRequestMutation = useMutation({
+    mutationFn: async ({ status, id }: { status: string; id: string }) => {
+      const res = await axios.post(
+        BASE_URL + `receive/request/${status}/${id}`,
+        {},
+        {
+          withCredentials: true,
+        },
+      );
+      // console.log(res.data);
+      dispatch(removeRequest(id));
+      return res.data;
+    },
+    onSuccess: () => {
+      // Invalidate and refetch the requests query to update the UI
+      queryClient.invalidateQueries({ queryKey: ['requests'] });
+    },
+    onError: (error) => {
+      console.error('Error reviewing request:', error);
+    },
+  });
+
+  // const reviewRequest = async (status: string, id: string) => {
+  //   try {
+  //     const res = await axios.post(
+  //       BASE_URL + `receive/request/${status}/${id}`,
+  //       {
+  //         withCredentials: true,
+  //       },
+  //     );
+  //     console.log(res.data);
+  //     return res.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const {
     isLoading,
     data: requests,
@@ -44,8 +84,8 @@ const Requests = () => {
   }
   return (
     <div className="flex flex-col items-center justify-center my-10">
-      <h1 className="text-4xl font-bold">Connections</h1>
-      {requests.map((request: any) => {
+      <h1 className="text-4xl font-bold">My Requests</h1>
+      {requests.map((request: connection) => {
         const { firstName, lastName, photoUrl, age, gender, about } =
           request.fromUserId;
         return (
@@ -68,14 +108,35 @@ const Requests = () => {
               </div>
               {about && <span>about:{about}</span>}
             </div>
-            <div className='ml-auto flex gap-2'>
-              <button className="btn btn-success rounded-xl">Accept</button>
-              <button className="btn btn-error rounded-xl">Reject</button>
+            <div className="ml-auto flex gap-2">
+              <button
+                className="btn btn-success rounded-xl"
+                // onClick={() => reviewRequest('accepted', request._id)}
+                onClick={() =>
+                  reviewRequestMutation.mutate({
+                    status: 'accepted',
+                    id: request._id,
+                  })
+                }
+              >
+                Accept
+              </button>
+              <button
+                className="btn btn-error rounded-xl"
+                // onClick={() => reviewRequest('rejected', request._id)}
+                onClick={() =>
+                  reviewRequestMutation.mutate({
+                    status: 'rejected',
+                    id: request._id,
+                  })
+                }
+              >
+                Reject
+              </button>
             </div>
           </div>
         );
       })}
-      
     </div>
   );
 };

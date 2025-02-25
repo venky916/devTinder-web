@@ -10,3 +10,10 @@ export type user = {
   about: string;
   skills?: string[];
 };
+
+export type connection = {
+  _id: string;
+  fromUserId: user;
+  toUserId: user;
+  status: string;
+};

@@ -22,7 +22,7 @@ const Body = () => {
     } catch (error: any) {
       if (error?.status === 401) {
         navigate('/login');
-        console.log('hello');
+        // console.log('hello');
       }
       console.error(error);
       // navigate('/Not-found')

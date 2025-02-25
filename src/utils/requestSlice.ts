@@ -1,12 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { connection } from '../types';
+
+const initialState: connection[] = [];
 
 const requestSlice = createSlice({
-    name:"requests",
-    initialState:null,
-    reducers:{
-        addRequests :(state,action)=>action.payload
-    }
-})
+  name: 'requests',
+  initialState,
+  reducers: {
+    addRequests: (state, action: PayloadAction<connection[]>) => action.payload,
+    removeRequest: (state, action: PayloadAction<string>) => {
+      const newArray = state?.filter((req) => req?._id !== action.payload);
+      return newArray;
+    },
+  },
+});
 
-export const {addRequests} = requestSlice.actions;
+export const { addRequests, removeRequest } = requestSlice.actions;
 export default requestSlice.reducer;

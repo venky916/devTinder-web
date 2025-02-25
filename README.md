@@ -33,3 +33,8 @@
 - see all my connections
 - new page - see all my connections
 - new page - see all my connection requests
+- feature - accept/reject connection request
+- feature -send or ignore the usercard from feed
+- added signup new user
+
+- tested E2E

@@ -5,10 +5,11 @@ import { BASE_URL } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { addConnections } from '../utils/conecctionSlice';
 import { user } from '../types';
+import { RootState } from '../utils/appStore';
 
 const Connections = () => {
   const dispatch = useDispatch();
-  //   const connections = useSelector((store:any)=>store.connections);
+  const connectionStore = useSelector((store: RootState) => store.connections);
 
   const fetchConnections = async () => {
     try {
@@ -32,6 +33,7 @@ const Connections = () => {
     queryKey: ['connections'],
     queryFn: fetchConnections,
   });
+  console.log(connections);
 
   if (isLoading) {
     return <div>Loading....</div>;
@@ -47,7 +49,10 @@ const Connections = () => {
         const { firstName, lastName, photoUrl, age, gender, about } =
           connection;
         return (
-          <div key={connection._id} className="flex justify-start w-7/12 p-4 bg-slate-300/20 my-3 rounded-xl">
+          <div
+            key={connection._id}
+            className="flex justify-start w-7/12 p-4 bg-slate-300/20 my-3 rounded-xl"
+          >
             <img
               alt="photo"
               src={photoUrl}
