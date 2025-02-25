@@ -54,7 +54,7 @@ const Profile = () => {
       gender,
       about,
       skills,
-      DOB,
+      DOB: DOB ? new Date(DOB) : undefined,
     },
   });
 
