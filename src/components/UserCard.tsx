@@ -1,22 +1,13 @@
 import React from 'react';
+import clsx from 'clsx';
+import { user } from '../types';
 
 interface UserCardProps {
   user: user;
+  className?: string;
 }
 
-interface user {
-  firstName: string;
-  lastName: string;
-  emailId: string;
-  age: number;
-  gender: string;
-  photoUrl: string;
-  DOB: Date;
-  about: string;
-  skills: string[];
-}
-
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, className }) => {
   const {
     firstName,
     lastName,
@@ -29,7 +20,12 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     emailId,
   } = user;
   return (
-    <div className="card bg-base-300 w-1/2 shadow-xl rounded-xl m-4 items-center">
+    <div
+      className={clsx(
+        'card bg-base-300 w-1/2 shadow-xl rounded-xl m-4 items-center',
+        className,
+      )}
+    >
       <figure className="px-10 pt-10 w-3/4 ">
         <img src={photoUrl} alt={emailId} className="rounded-xl" />
       </figure>

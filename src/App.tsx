@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
 import Feed from './components/Feed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Connections from './components/Connections';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -19,8 +20,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Body />}>
                 <Route index element={<Feed />} />
-                <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/connections" element={<Connections />} />
+                <Route path="/requests" element={<Login />} />
               </Route>
             </Routes>
           </BrowserRouter>
