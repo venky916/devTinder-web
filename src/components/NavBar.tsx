@@ -1,24 +1,23 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
-import { removeUser } from "../utils/userSlice";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constants';
+import { removeUser } from '../utils/userSlice';
 
 const NavBar = () => {
-  const user = useSelector((store: any) => store?.user)
+  const user = useSelector((store: any) => store?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(user);
   const handleLogout = async () => {
     try {
-      await axios.post(BASE_URL + 'logout', {},{withCredentials:true});
+      await axios.post(BASE_URL + 'logout', {}, { withCredentials: true });
       dispatch(removeUser());
       navigate('/login');
-
     } catch (error) {
       // Error logic redirect to error page
     }
-  }
+  };
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
@@ -55,6 +54,11 @@ const NavBar = () => {
                 <li>
                   <Link to="/connections" className="justify-between">
                     Connections
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/requests" className="justify-between">
+                    Requests
                   </Link>
                 </li>
                 <li>

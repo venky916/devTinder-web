@@ -31,3 +31,5 @@
 - edit profile features
 - added toast on update profile
 - see all my connections
+- new page - see all my connections
+- new page - see all my connection requests

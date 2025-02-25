@@ -7,6 +7,7 @@ import appStore from './utils/appStore';
 import Feed from './components/Feed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Connections from './components/Connections';
+import Requests from './components/Requests';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -23,7 +24,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/connections" element={<Connections />} />
-                <Route path="/requests" element={<Login />} />
+                <Route path="/requests" element={<Requests />} />
               </Route>
             </Routes>
           </BrowserRouter>
