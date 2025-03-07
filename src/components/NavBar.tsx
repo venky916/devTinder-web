@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../utils/userSlice';
-import { RootState } from '../utils/appStore';
+
 
 const NavBar = () => {
-  const user:any = useSelector((store: RootState) => store?.user) || {};
+  const user = useSelector((store: any) => store?.user) || {};
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(user);
@@ -41,7 +41,7 @@ const NavBar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img alt="user image" src={user?.photoUrl} />
+                  <img alt="UI" src={user?.photoUrl} />
                 </div>
               </div>
               <ul
