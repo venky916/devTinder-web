@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addConnections } from '../utils/conecctionSlice';
 import { user } from '../types';
 import { RootState } from '../utils/appStore';
+import { Link } from 'react-router-dom';
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -33,24 +34,24 @@ const Connections = () => {
     queryKey: ['connections'],
     queryFn: fetchConnections,
   });
-  console.log(connections);
+  // console.log(connections);
 
   if (isLoading) {
     return <div>Loading....</div>;
   }
   if (error) {
-    console.log(error);
+    // console.log(error);
     return <div>Something went wrong</div>;
   }
   return (
     <div className="flex flex-col items-center justify-center my-10">
       <h1 className="text-4xl font-bold">Connections</h1>
       {connections.map((connection: user) => {
-        const { firstName, lastName, photoUrl, age, gender, about } =
+        const { firstName, lastName, photoUrl, age, gender, about, _id } =
           connection;
         return (
           <div
-            key={connection._id}
+            key={_id}
             className="flex justify-start w-7/12 p-4 bg-slate-300/20 my-3 rounded-xl"
           >
             <img
@@ -67,6 +68,13 @@ const Connections = () => {
                 {gender && <span>gender:{gender}</span>}
               </div>
               {about && <span>about:{about}</span>}
+            </div>
+            <div className="ml-auto">
+              <Link to={'/chat/' + _id}>
+                <button className="btn btn-primary rounded-xl hover:bg-violet-400">
+                  Chat
+                </button>
+              </Link>
             </div>
           </div>
         );

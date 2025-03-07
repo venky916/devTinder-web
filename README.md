@@ -35,6 +35,16 @@
 - new page - see all my connection requests
 - feature - accept/reject connection request
 - feature -send or ignore the usercard from feed
-- added signup new user
-
+- added sign up new user
 - tested E2E
+
+
+# Adding web socket 
+- auth in websockets
+- fix bug if i am not friend then i should not be able to send message?
+
+- feature - show green when online - [lastseen 2 hrs ago]
+- when connection establish store that info
+- limit messages when fetching from db
+- tic-tac-toe game
+- type racer
