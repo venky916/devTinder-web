@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../utils/userSlice';
+import { RootState } from '../utils/appStore';
 
 const NavBar = () => {
-  const user = useSelector((store: any) => store?.user);
+  const user:any = useSelector((store: RootState) => store?.user) || {};
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(user);
@@ -18,6 +19,7 @@ const NavBar = () => {
       // Error logic redirect to error page
     }
   };
+
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
@@ -29,7 +31,7 @@ const NavBar = () => {
       {user && (
         <>
           <div>
-            <p>WELCOME, {user?.firstName}</p>
+            <p>WELCOME, {user?.firstName }</p>
           </div>
           <div className="flex-none gap-2">
             <div className="dropdown dropdown-end mx-5">

@@ -1,16 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
 import { BASE_URL } from '../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addConnections } from '../utils/conecctionSlice';
 import { user } from '../types';
-import { RootState } from '../utils/appStore';
 import { Link } from 'react-router-dom';
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const connectionStore = useSelector((store: RootState) => store.connections);
 
   const fetchConnections = async () => {
     try {

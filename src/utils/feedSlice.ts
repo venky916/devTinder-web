@@ -33,7 +33,7 @@ const feedSlice = createSlice({
       return;
     },
     removeUserFromFeed: (state, action: PayloadAction<string>) => {
-      const newFeed = state.filter((user: any) => user._id !== action.payload);
+      const newFeed = state.filter((user: user) => user._id !== action.payload);
       return newFeed;
     },
   },

@@ -52,7 +52,7 @@ const Login = () => {
       });
       dispatch(addUser(response.data.data)); // Update Redux store
       navigate('/'); // Navigate to home page
-    } catch (error: any) {
+    } catch (error :any) {
       setError('root', {
         message: error?.response?.data?.message || 'An error occurred',
       });

@@ -1,10 +1,5 @@
-import { string, z } from 'zod';
-import {
-  useFieldArray,
-  useForm,
-  SubmitHandler,
-  Controller,
-} from 'react-hook-form';
+import { z } from 'zod';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
@@ -13,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { BASE_URL } from '../utils/constants';
 import UserCard from './UserCard';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const formSchema = z.object({
   firstName: z.string().nonempty('First name is required'),
@@ -43,7 +38,7 @@ const Profile = () => {
     control,
     setValue,
     getValues,
-    watch,
+    // watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,7 +59,7 @@ const Profile = () => {
   // });
 
   const [inputValue, setInputValue] = useState('');
-  const [showToast,setShowToast]= useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   // Add a skill to the array
   const addSkill = () => {
@@ -94,9 +89,9 @@ const Profile = () => {
       console.log(response);
       dispatch(addUser(response.data.data));
       setShowToast(true);
-      const interval = setTimeout(()=>{
+      setTimeout(() => {
         setShowToast(false);
-      },3000)
+      }, 3000);
     } catch (error: any) {
       setError('root', {
         message: error?.message,

@@ -19,9 +19,9 @@ const UserCard: React.FC<UserCardProps> = ({ user, className }) => {
     age,
     gender,
     photoUrl,
-    DOB,
+    // DOB,
     about,
-    skills,
+    // skills,
     emailId,
     _id,
   } = user;

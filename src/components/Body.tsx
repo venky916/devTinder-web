@@ -6,11 +6,12 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
 import { addUser } from '../utils/userSlice';
 import { useEffect } from 'react';
+import { RootState } from '../utils/appStore';
 
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((store: any) => store?.user);
+  const user = useSelector((store: RootState) => store?.user);
 
   const fetchUser = async () => {
     if (user) return;
